@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Dashboard - CampusFit</title>
+</head>
+<body class="dashboard-page">
+
+  <header class="dashboard-header">
+    <div class="dashboard-header-inner">
+      <div class="dashboard-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="dashboard-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-hero-card">
+      <div class="dashboard-hero-text">
+        <p class="dashboard-eyebrow">Member Dashboard</p>
+        <h1>Welcome{{ ", " + user.name if user.name else "" }}</h1>
+        <p class="dashboard-subtext">
+          Stay on track with your selected plan and today’s workout.
+        </p>
+      </div>
+    </section>
+
+    <section class="dashboard-grid">
+
+      {% if selected_plan %}
+        <a href="{{ url_for('plan_overview', slug=user.selected_plan_slug) }}" class="dashboard-card current-plan-card clickable-card">
+          <h2>Current Plan</h2>
+
+          <p class="plan-title-display">{{ selected_plan['title'] }}</p>
+          <p class="card-text current-plan-subtitle">
+            {{ selected_plan['subtitle'] }}
+          </p>
+
+          <div class="current-plan-meta">
+            <div class="current-plan-meta-item">
+              <span class="current-plan-meta-label">Goal</span>
+              <span class="current-plan-meta-value">{{ selected_plan['goal'] }}</span>
+            </div>
+
+            <div class="current-plan-meta-item">
+              <span class="current-plan-meta-label">Difficulty</span>
+              <span class="current-plan-meta-value">{{ selected_plan['difficulty'] }}</span>
+            </div>
+          </div>
+        </a>
+      {% else %}
+        <div class="dashboard-card current-plan-card">
+          <h2>Current Plan</h2>
+          <p class="plan-status-label">No plan selected yet</p>
+          <p class="card-text">
+            Choose 1 of the 6 available workout plans. Once selected, your chosen plan will stay on your dashboard until you decide to switch.
+          </p>
+          <a href="{{ url_for('plans') }}" class="btn btn-primary dashboard-btn">Choose a Plan</a>
+        </div>
+      {% endif %}
+
+      {% if selected_plan and today_plan_info %}
+        <a href="{{ url_for('workout_details') }}" class="dashboard-card progress-card clickable-card">
+          <h2>Today’s Workout</h2>
+
+          <p class="plan-status-label">
+            {{ today_plan_info['weekday_name'] }} — Day {{ today_plan_info['day_number'] }}
+          </p>
+
+          <p class="card-text">
+            {{ today_plan_info['workout_title'] }}
+          </p>
+
+          {% if today_plan_info['is_rest_day'] %}
+            <div class="dashboard-placeholder">Recovery / Rest Day</div>
+          {% else %}
+            <div class="dashboard-placeholder">Tap to open workout details</div>
+          {% endif %}
+        </a>
+      {% else %}
+        <div class="dashboard-card progress-card">
+          <h2>Today’s Workout</h2>
+          <p class="card-text">
+            Select a plan to see what workout matches today’s weekday.
+          </p>
+          <div class="dashboard-placeholder">
+            No workout available yet
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="dashboard-card quick-actions-card">
+        <h2>Quick Actions</h2>
+        <div class="quick-actions-list">
+          <a href="{{ url_for('plans') }}" class="btn btn-outline dashboard-action-btn">View Plans</a>
+          <a href="{{ url_for('logout') }}" class="btn btn-outline dashboard-action-btn">Logout</a>
+        </div>
+      </div>
+
+      <div class="dashboard-card motivation-card">
+        <h2>Nutrition Reminder</h2>
+        <p class="card-text">
+          Your results depend on more than workouts. Proper nutrition, hydration, and recovery are essential to get the most from your plan.
+        </p>
+      </div>
+
+      <div class="dashboard-card motivation-card">
+        <h2>Stay Consistent</h2>
+        <p class="card-text">
+          Consistency beats intensity. Stick to your plan week by week and progress will follow.
+        </p>
+      </div>
+
+    </section>
+  </main>
+
+</body>
+</html>

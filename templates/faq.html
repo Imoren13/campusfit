@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>FAQ - CampusFit</title>
+</head>
+<body class="info-page">
+
+  <header class="info-header">
+    <div class="info-header-inner">
+      <div class="info-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="info-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <section class="info-hero">
+      <h1>Frequently Asked Questions</h1>
+      <p>
+        Find answers about CampusFit memberships, workout plans, subscriptions, and dashboard features.
+      </p>
+    </section>
+
+    <section class="info-grid">
+      <article class="info-card">
+        <h2>What is CampusFit?</h2>
+        <p>
+          CampusFit is a digital fitness membership website that provides structured workout plans and a member dashboard.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Who is CampusFit for?</h2>
+        <p>
+          CampusFit is designed mainly for college students who want a simple way to follow workout plans and stay consistent.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>How many workout plans are offered?</h2>
+        <p>
+          CampusFit currently offers six workout plans, including muscle building, fat loss, beginner, home workout, strength, and athletic performance plans.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Can I change my selected plan?</h2>
+        <p>
+          Yes. Users can return to the plan selection page and choose a different workout plan at any time.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Does CampusFit track completed exercises?</h2>
+        <p>
+          Yes. The Workout Details page allows users to check off completed exercises and view workout completion progress.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Is payment processing active?</h2>
+        <p>
+          The current version uses a simulated subscription activation flow. A payment gateway may be added later.
+        </p>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>

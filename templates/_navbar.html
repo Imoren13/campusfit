@@ -1,0 +1,30 @@
+<header class="nav">
+  <div class="nav-inner">
+
+    <div class="logo">
+      <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+    </div>
+
+    <div class="dropdown">
+      <button class="dropdown-btn" type="button">Menu ▾</button>
+
+      <div class="dropdown-content">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('management') }}">Management</a>
+        <a href="{{ url_for('faq') }}">FAQ</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+        <a href="{{ url_for('policy') }}">Policy</a>
+        <a href="{{ url_for('feedback') }}">Feedback</a>
+        <a href="{{ url_for('resources') }}">Resources</a>
+        <a href="{{ url_for('subscription') }}">Subscribe</a>
+      </div>
+    </div>
+
+    <div class="nav-actions">
+      <a class="btn btn-ghost" href="{{ url_for('login') }}">Log In</a>
+      <a class="btn btn-primary" href="{{ url_for('register') }}">Get Started</a>
+    </div>
+
+  </div>
+</header>

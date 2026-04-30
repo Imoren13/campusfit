@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Management - CampusFit</title>
+</head>
+<body class="info-page">
+
+  <header class="info-header">
+    <div class="info-header-inner">
+      <div class="info-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="info-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <section class="info-hero">
+      <h1>Management & Employment</h1>
+      <p>
+        CampusFit is built and managed with a focus on simplicity, accessibility, and helping students stay consistent with their fitness goals.
+      </p>
+    </section>
+
+    <section class="info-grid">
+
+      <article class="info-card">
+        <h2>Founder / Developer</h2>
+        <p>
+          CampusFit was developed as part of an e-commerce project focused on delivering a digital fitness service
+          tailored to college students. The goal is to combine structured training with a simple, user-friendly experience.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Mission</h2>
+        <p>
+          The mission of CampusFit is to make structured fitness accessible and easy to follow, helping users stay
+          consistent and improve their overall health and performance.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Future Growth</h2>
+        <p>
+          CampusFit may expand to include features such as personalized plans, progress tracking analytics,
+          and AI-driven recommendations.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Employment Opportunities</h2>
+        <p>
+          While CampusFit is currently a student project, future versions of the platform could include opportunities
+          for developers, fitness professionals, and data analysts to contribute to the platform’s growth.
+        </p>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>

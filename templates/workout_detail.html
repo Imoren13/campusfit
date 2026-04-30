@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Workout Details - CampusFit</title>
+</head>
+<body class="workout-detail-page">
+
+  <header class="workout-detail-header">
+    <div class="workout-detail-header-inner">
+      <div class="workout-detail-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="workout-detail-nav">
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('plan_overview', slug=user.selected_plan_slug) }}">Current Plan</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="workout-detail-main">
+    <section class="workout-detail-hero">
+      <p class="workout-detail-eyebrow">Workout Details</p>
+      <h1>{{ selected_plan['title'] }}</h1>
+      <p class="workout-detail-subtext">
+        {{ today_workout['weekday_name'] }} — Day {{ today_workout['day_number'] }}
+      </p>
+    </section>
+
+    {% if today_workout['is_rest_day'] %}
+      <section class="workout-rest-card">
+        <h2>{{ today_workout['workout_title'] }}</h2>
+        <p>
+          Today is a rest or recovery day. Use this time to recover, hydrate, and get ready for the next workout.
+        </p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">Back to Dashboard</a>
+      </section>
+    {% else %}
+      <section class="workout-detail-grid">
+        <article class="workout-detail-card">
+          <h2>Today’s Workout</h2>
+          <p class="workout-title-display">{{ today_workout['workout_title'] }}</p>
+          <p class="workout-card-text">
+            Follow your workout in order and check off each exercise as you complete it.
+          </p>
+        </article>
+
+        <article class="workout-detail-card">
+          <h2>Intensity Guidance</h2>
+          <p class="workout-card-text">
+            {{ selected_plan['guidance'] }}
+          </p>
+        </article>
+
+        <article class="workout-detail-card workout-progress-card">
+          <h2>Workout Progress</h2>
+
+          <div class="progress-circle-wrapper">
+            <svg class="progress-ring" width="160" height="160">
+              <circle class="progress-ring-bg" cx="80" cy="80" r="64"></circle>
+              <circle class="progress-ring-fill" cx="80" cy="80" r="64"></circle>
+            </svg>
+            <div class="progress-circle-text">
+              <span id="progressPercent">0%</span>
+            </div>
+          </div>
+
+          <p class="workout-card-text" id="progressLabel">
+            0 of {{ today_workout['exercises']|length }} exercises completed
+          </p>
+        </article>
+
+        <article class="workout-detail-card workout-checklist-card">
+          <h2>Exercise Checklist</h2>
+
+          <div class="exercise-checklist">
+            {% for exercise in today_workout['exercises'] %}
+              <label class="exercise-item">
+                <input
+                  type="checkbox"
+                  class="exercise-checkbox"
+                  data-exercise-name="{{ exercise }}"
+                  {% if exercise in completed_exercises %}checked{% endif %}
+                >
+                <span>{{ exercise }}</span>
+              </label>
+            {% endfor %}
+          </div>
+        </article>
+      </section>
+
+      <section class="workout-detail-actions">
+        <a href="{{ url_for('dashboard') }}" class="btn btn-outline btn-lg">Back to Dashboard</a>
+      </section>
+    {% endif %}
+  </main>
+
+  {% if not today_workout['is_rest_day'] %}
+  <script>
+    const checkboxes = document.querySelectorAll(".exercise-checkbox");
+    const progressPercent = document.getElementById("progressPercent");
+    const progressLabel = document.getElementById("progressLabel");
+    const progressRing = document.querySelector(".progress-ring-fill");
+
+    const dayNumber = "{{ today_workout['day_number'] }}";
+
+    const radius = 64;
+    const circumference = 2 * Math.PI * radius;
+
+    progressRing.style.strokeDasharray = circumference;
+    progressRing.style.strokeDashoffset = circumference;
+
+    let confettiTriggered = false;
+
+    function launchConfetti() {
+      for (let i = 0; i < 120; i++) {
+        const confetti = document.createElement("div");
+        confetti.className = "confetti-piece";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.animationDelay = (Math.random() * 0.8) + "s";
+        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+          confetti.remove();
+        }, 3000);
+      }
+    }
+
+    function updateProgress() {
+      const total = checkboxes.length;
+      const completed = [...checkboxes].filter(cb => cb.checked).length;
+      const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+      progressPercent.textContent = percent + "%";
+      progressLabel.textContent = `${completed} of ${total} exercises completed`;
+
+      const offset = circumference - (percent / 100) * circumference;
+      progressRing.style.strokeDashoffset = offset;
+
+      if (percent === 100 && !confettiTriggered) {
+        confettiTriggered = true;
+        launchConfetti();
+      }
+
+      if (percent < 100) {
+        confettiTriggered = false;
+      }
+    }
+
+    function saveExerciseStatus(checkbox) {
+      const formData = new FormData();
+      formData.append("exercise_name", checkbox.dataset.exerciseName);
+      formData.append("completed", checkbox.checked ? "true" : "false");
+      formData.append("day_number", dayNumber);
+
+      fetch("{{ url_for('toggle_exercise') }}", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error("Save failed");
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error(error);
+        alert("There was a problem saving your progress. Please try again.");
+      });
+    }
+
+    checkboxes.forEach(cb => {
+      cb.addEventListener("change", () => {
+        updateProgress();
+        saveExerciseStatus(cb);
+      });
+    });
+
+    updateProgress();
+  </script>
+  {% endif %}
+
+</body>
+</html>

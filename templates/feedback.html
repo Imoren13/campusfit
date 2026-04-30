@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Feedback - CampusFit</title>
+</head>
+<body class="info-page">
+
+  <header class="info-header">
+    <div class="info-header-inner">
+      <div class="info-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="info-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <section class="info-hero">
+      <h1>Customer Feedback</h1>
+      <p>
+        We value user feedback to improve the CampusFit experience.
+      </p>
+    </section>
+
+    <section class="info-grid">
+      <article class="info-card full">
+        <h2>Share Your Feedback</h2>
+
+        <form method="POST" class="info-form">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Tell us about your experience..." required></textarea>
+          <button type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>

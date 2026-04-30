@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Services - CampusFit</title>
+</head>
+<body class="info-page">
+
+  <header class="info-header">
+    <div class="info-header-inner">
+      <div class="info-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="info-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('subscription') }}">Subscribe</a>
+        <a href="{{ url_for('login') }}">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <section class="info-hero">
+      <h1>CampusFit Services</h1>
+      <p>
+        CampusFit is a subscription-based digital fitness service for students who want structured workout plans,
+        a simple dashboard, and guided daily training.
+      </p>
+    </section>
+
+    <section class="info-grid">
+      <article class="info-card">
+        <h2>Membership Access</h2>
+        <p>
+          Members receive access to the CampusFit dashboard, workout plan selection, daily workout tracking,
+          and progress tools.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Workout Plans</h2>
+        <p>
+          Users can choose from six structured workout plans based on goals such as muscle building, fat loss,
+          beginner fitness, home training, strength, and athletic performance.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Today’s Workout</h2>
+        <p>
+          The dashboard automatically maps each plan to the current weekday, so users know what workout to complete
+          each day.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Workout Details</h2>
+        <p>
+          Members can open a detailed workout page, check off completed exercises, and view a circular progress
+          indicator for the day’s workout.
+        </p>
+      </article>
+
+      <article class="info-card full">
+        <h2>Subscription Model</h2>
+        <p>
+          CampusFit currently uses one membership tier that provides full access to the service. Payment gateway
+          integration may be added later, but the current version uses a simulated subscription activation flow.
+        </p>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>

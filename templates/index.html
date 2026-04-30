@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+  <!-- HERO WRAPPER -->
+  <section class="hero">
+    <!-- Header/Nav -->
+    <header class="nav">
+      <div class="nav-inner">
+
+      
+
+        <div class="logo">
+          <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+        </div>
+
+        <div class="dropdown">
+          <button class="dropdown-btn" type="button">Menu ▾</button>
+
+          <div class="dropdown-content">
+            <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('services') }}">Services</a>
+            <a href="{{ url_for('management') }}">Management</a>
+            <a href="{{ url_for('faq') }}">FAQ</a>
+            <a href="{{ url_for('contact') }}">Contact</a>
+            <a href="{{ url_for('policy') }}">Policy</a>
+            <a href="{{ url_for('feedback') }}">Feedback</a>
+            <a href="{{ url_for('resources') }}">Resources</a>
+            <a href="{{ url_for('subscription') }}">Subscribe</a>
+          </div>
+        </div>
+
+        <div class="nav-actions">
+          <a class="btn btn-ghost" href="{{ url_for('login') }}">Log In</a>
+          <a class="btn btn-primary" href="{{ url_for('register') }}">Get Started</a>
+        </div>
+
+      </div>
+    </header>
+
+  <!-- Hero content -->
+    <div class="hero-content">
+      <div class="hero-left">
+        <h1 class="hero-title">
+          Level Up Your<br>
+          <span class="highlight">Fitness</span> on Campus
+        </h1>
+
+        <p class="hero-subtitle">
+          Join CampusFit and transform your fitness journey<br>
+          with tailored workouts and community support.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}">Get Started</a>
+          <a class="btn btn-outline btn-lg" href="#about">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contact" class="footer">
+    <div class="footer-inner">
+      <div>
+        <h3>CampusFit</h3>
+        <p>Fitness for students. Built for consistency.</p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>Email: campusfit@example.com</p>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <a href="#about">About</a><br>
+        <a href="#plans">Plans</a><br>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+  const dropdownBtn = document.querySelector(".dropdown-btn");
+  const dropdownContent = document.querySelector(".dropdown-content");
+
+  dropdownBtn.addEventListener("click", function (event) {
+    event.stopPropagation();
+    dropdownContent.classList.toggle("show");
+  });
+
+  document.addEventListener("click", function () {
+    dropdownContent.classList.remove("show");
+  });
+</script>
+</body>
+</html>

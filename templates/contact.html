@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Contact - CampusFit</title>
+</head>
+<body class="info-page">
+
+  <header class="info-header">
+    <div class="info-header-inner">
+      <div class="info-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="info-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('faq') }}">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <section class="info-hero">
+      <h1>Contact Us</h1>
+      <p>
+        Have questions, feedback, or need support? Reach out and we’ll get back to you as soon as possible.
+      </p>
+    </section>
+
+    <section class="info-grid">
+
+      <article class="info-card">
+        <h2>Contact Information</h2>
+        <ul>
+          <li>Email: support@campusfit.com</li>
+          <li>Phone: (864) 000-0000</li>
+          <li>Location: Greenville, SC</li>
+        </ul>
+      </article>
+
+      <article class="info-card">
+        <h2>Business Hours</h2>
+        <ul>
+          <li>Monday – Friday: 9:00 AM – 6:00 PM</li>
+          <li>Saturday: 10:00 AM – 4:00 PM</li>
+          <li>Sunday: Closed</li>
+        </ul>
+      </article>
+
+      <article class="info-card full">
+        <h2>Send Us a Message</h2>
+
+        <form method="POST" action="{{ url_for('feedback') }}" class="info-form">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Your Message" required></textarea>
+          <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>

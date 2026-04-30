@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Subscription - CampusFit</title>
+</head>
+<body class="subscription-page">
+
+  <main class="subscription-main">
+    <section class="subscription-card">
+      <h1>CampusFit Membership</h1>
+      <p class="subscription-price">$9.99 / month</p>
+
+      <p class="subscription-text">
+        Get access to structured workout plans, your member dashboard,
+        today’s workout, and exercise completion tracking.
+      </p>
+
+      <ul class="subscription-list">
+        <li>Access to all 6 workout plans</li>
+        <li>Personal dashboard</li>
+        <li>Today’s workout tracker</li>
+        <li>Workout details with progress circle</li>
+        <li>Plan switching anytime</li>
+      </ul>
+
+      {% if user.subscription_active %}
+        <p class="subscription-active">Your subscription is already active.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+      {% else %}
+        <form method="POST">
+          <button type="submit" class="btn btn-primary btn-lg">
+            Activate Subscription
+          </button>
+        </form>
+      {% endif %}
+    </section>
+  </main>
+
+</body>
+</html>

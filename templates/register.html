@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Register - CampusFit</title>
+</head>
+<body>
+  <main class="register-page">
+    <section class="register-hero">
+      <div class="register-card">
+        <div class="register-logo">
+          <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+        </div>
+
+        <h1>Create Account</h1>
+        <p>Start your CampusFit journey and unlock your training plan.</p>
+
+        <form method="POST" class="register-form">
+          <input type="text" name="name" placeholder="Full name" required>
+          <input type="email" name="email" placeholder="Email address" required>
+          <input type="password" name="password" placeholder="Password" required>
+
+          <button type="submit" class="btn btn-primary register-btn">Create Account</button>
+        </form>
+
+        <div class="register-links">
+          <a href="{{ url_for('index') }}">Back to Home</a>
+          <span>|</span>
+          <a href="{{ url_for('login') }}">Already have an account?</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

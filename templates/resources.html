@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Resources - CampusFit</title>
+</head>
+<body class="info-page">
+
+  <header class="info-header">
+    <div class="info-header-inner">
+      <div class="info-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="info-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('faq') }}">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <section class="info-hero">
+      <h1>Fitness Resources</h1>
+      <p>
+        Helpful external resources for fitness, nutrition, recovery, and general health information.
+      </p>
+    </section>
+
+    <section class="info-grid">
+      <article class="info-card">
+        <h2>Exercise & Training</h2>
+        <div class="info-links">
+          <a href="https://www.acefitness.org/resources/everyone/exercise-library/" target="_blank">ACE Exercise Library</a>
+          <a href="https://www.muscleandstrength.com/exercises" target="_blank">Muscle & Strength Exercise Guide</a>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <h2>Nutrition</h2>
+        <div class="info-links">
+          <a href="https://www.myplate.gov/" target="_blank">MyPlate Nutrition Guide</a>
+          <a href="https://www.eatright.org/" target="_blank">Academy of Nutrition and Dietetics</a>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <h2>Health & Safety</h2>
+        <div class="info-links">
+          <a href="https://www.cdc.gov/physicalactivity/" target="_blank">CDC Physical Activity Guidelines</a>
+          <a href="https://www.mayoclinic.org/healthy-lifestyle/fitness" target="_blank">Mayo Clinic Fitness</a>
+        </div>
+      </article>
+
+      <article class="info-card">
+        <h2>Recovery</h2>
+        <p>
+          Recovery, hydration, and sleep are important parts of any fitness routine.
+          These resources can help users make safer and more informed decisions.
+        </p>
+      </article>
+    </section>
+  </main>
+
+</body>
+</html>

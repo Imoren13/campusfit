@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Service Policy - CampusFit</title>
+</head>
+<body class="info-page">
+
+  <header class="info-header">
+    <div class="info-header-inner">
+      <div class="info-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="info-nav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('services') }}">Services</a>
+        <a href="{{ url_for('contact') }}">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="info-main">
+    <section class="info-hero">
+      <h1>Service Guarantee & Policy</h1>
+      <p>
+        CampusFit is committed to providing a reliable and valuable fitness experience for all users.
+      </p>
+    </section>
+
+    <section class="info-grid">
+
+      <article class="info-card full">
+        <h2>Service Guarantee</h2>
+        <p>
+          CampusFit aims to provide structured workout plans, a functional dashboard, and a smooth user experience.
+          While results depend on individual effort, we guarantee access to all features included in your membership.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Subscription Policy</h2>
+        <p>
+          CampusFit currently operates on a membership model. Users must activate their subscription to access
+          dashboard features and workout plans.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Refund Policy</h2>
+        <p>
+          Since this version of CampusFit uses a simulated subscription system, no real payments are processed.
+          In future versions, refund policies will be clearly defined and applied where applicable.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>User Responsibility</h2>
+        <p>
+          Users are responsible for performing exercises safely and consulting a professional if needed.
+          CampusFit is not liable for injuries resulting from improper use of the workouts.
+        </p>
+      </article>
+
+      <article class="info-card">
+        <h2>Future Updates</h2>
+        <p>
+          CampusFit may introduce new features, improvements, and policies as the platform grows.
+          Users will be notified of major updates affecting their experience.
+        </p>
+      </article>
+
+    </section>
+  </main>
+
+</body>
+</html>

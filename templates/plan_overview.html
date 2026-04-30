@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>{{ plan['title'] }} - Plan Overview</title>
+</head>
+<body class="plan-overview-page">
+
+  <header class="plan-overview-header">
+    <div class="plan-overview-header-inner">
+      <div class="plan-overview-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="plan-overview-nav">
+        <a href="{{ url_for('plans') }}">Choose Your Plan</a>
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="plan-overview-main">
+    <section class="plan-overview-hero">
+      <p class="plan-overview-eyebrow">Plan Overview</p>
+      <h1>{{ plan['title'] }}</h1>
+      <p class="plan-overview-subtext">{{ plan['subtitle'] }}</p>
+
+      <div class="plan-overview-meta">
+        <div class="plan-meta-pill">
+          <span class="meta-label">Goal</span>
+          <span class="meta-value">{{ plan['goal'] }}</span>
+        </div>
+        <div class="plan-meta-pill">
+          <span class="meta-label">Difficulty</span>
+          <span class="meta-value">{{ plan['difficulty'] }}</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="plan-overview-grid">
+
+      <article class="plan-overview-card description-card">
+        <h2>Description</h2>
+        <p>{{ plan['description'] }}</p>
+      </article>
+
+      <article class="plan-overview-card">
+        <h2>{{ plan['guidance_title'] }}</h2>
+        <p>{{ plan['guidance'] }}</p>
+      </article>
+
+      <article class="plan-overview-card">
+        <h2>Weekly Structure</h2>
+        <ul class="overview-list">
+          {% for item in plan['weekly_structure'] %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+
+      {% for day in plan['days'] %}
+      <article class="plan-overview-card plan-day-card">
+        <h2>{{ day['title'] }}</h2>
+        <ul class="overview-list">
+          {% for item in day['items'] %}
+            <li>{{ item }}</li>
+          {% endfor %}
+        </ul>
+      </article>
+      {% endfor %}
+
+    </section>
+
+    <section class="plan-overview-actions">
+      <a href="{{ url_for('plans') }}" class="btn btn-outline btn-lg">Back</a>
+
+      <form action="{{ url_for('choose_plan', slug=slug) }}" method="POST">
+         <button type="submit" class="btn btn-primary btn-lg">Choose Plan</button>
+      </form>
+    </section>
+  </main>
+
+</body>
+</html>

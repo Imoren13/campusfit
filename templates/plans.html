@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <title>Choose Your Plan - CampusFit</title>
+</head>
+<body class="plans-page">
+
+  <header class="plans-header">
+    <div class="plans-header-inner">
+      <div class="plans-logo">
+        <img src="{{ url_for('static', filename='images/Logo1.1.png') }}" alt="CampusFit Logo">
+      </div>
+
+      <nav class="plans-nav">
+        <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        <a href="{{ url_for('logout') }}" class="btn btn-primary">Logout</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="plans-main">
+    <section class="plans-hero-card">
+      <p class="plans-eyebrow">Choose Your Plan</p>
+      <h1>Find the training style that fits you best</h1>
+      <p class="plans-subtext">
+        Browse through the available workout plans and select the one that matches your goals,
+        experience level, and lifestyle.
+      </p>
+    </section>
+
+    <section class="stacked-plans-section">
+      <div class="stacked-plans-wrapper">
+
+        <button id="prevPlanBtn" class="stacked-arrow-btn stacked-arrow-left" type="button" aria-label="Previous plan">
+          &#8592;
+        </button>
+
+        <button id="nextPlanBtn" class="stacked-arrow-btn stacked-arrow-right" type="button" aria-label="Next plan">
+          &#8594;
+        </button>
+
+        <div class="stacked-plan-card active">
+          <div class="plan-badge">5-Day Split</div>
+          <h2>Muscle Builder</h2>
+          <p class="plan-goal"><strong>Goal:</strong> Build muscle, improve strength, and maintain conditioning</p>
+          <p class="plan-difficulty"><strong>Difficulty:</strong> Intermediate</p>
+          <p class="plan-summary">
+            A structured split focused on muscle growth, upper/lower balance, and steady conditioning work.
+          </p>
+          <a href="{{ url_for('plan_overview', slug='muscle-builder') }}" class="btn btn-primary plan-btn">View Plan</a>
+        </div>
+
+        <div class="stacked-plan-card next-1">
+          <div class="plan-badge">Fat Loss</div>
+          <h2>Fat Loss &amp; Conditioning</h2>
+          <p class="plan-goal"><strong>Goal:</strong> Burn fat, improve endurance, maintain muscle</p>
+          <p class="plan-difficulty"><strong>Difficulty:</strong> Beginner–Intermediate</p>
+          <p class="plan-summary">
+            A faster-paced plan with circuits, cardio, and HIIT to maximize calorie burn while keeping muscle.
+          </p>
+          <a href="{{ url_for('plan_overview', slug='fat-loss-conditioning') }}" class="btn btn-primary plan-btn">View Plan</a>
+        </div>
+
+        <div class="stacked-plan-card next-2">
+          <div class="plan-badge">Beginner</div>
+          <h2>Beginner Full Body</h2>
+          <p class="plan-goal"><strong>Goal:</strong> Learn movements, build consistency, improve overall fitness</p>
+          <p class="plan-difficulty"><strong>Difficulty:</strong> Beginner</p>
+          <p class="plan-summary">
+            A simpler full-body structure with active recovery days to help new users build a strong foundation.
+          </p>
+          <a href="{{ url_for('plan_overview', slug='beginner-full-body') }}" class="btn btn-primary plan-btn">View Plan</a>
+        </div>
+
+        <div class="stacked-plan-card hidden-card">
+          <div class="plan-badge">No Gym</div>
+          <h2>Home Workout</h2>
+          <p class="plan-goal"><strong>Goal:</strong> Build strength and stay active without a gym</p>
+          <p class="plan-difficulty"><strong>Difficulty:</strong> Beginner–Intermediate</p>
+          <p class="plan-summary">
+            A bodyweight-friendly plan built for users training at home with little to no equipment.
+          </p>
+          <a href="{{ url_for('plan_overview', slug='home-workout') }}" class="btn btn-primary plan-btn">View Plan</a>
+        </div>
+
+        <div class="stacked-plan-card hidden-card">
+          <div class="plan-badge">Strength</div>
+          <h2>Strength / Power</h2>
+          <p class="plan-goal"><strong>Goal:</strong> Increase overall strength and power in major lifts</p>
+          <p class="plan-difficulty"><strong>Difficulty:</strong> Intermediate–Advanced</p>
+          <p class="plan-summary">
+            A heavier, lower-rep plan focused on progressive strength development and recovery-aware training.
+          </p>
+          <a href="{{ url_for('plan_overview', slug='strength-power') }}" class="btn btn-primary plan-btn">View Plan</a>
+        </div>
+
+        <div class="stacked-plan-card hidden-card">
+          <div class="plan-badge">Athletic</div>
+          <h2>Athletic Performance</h2>
+          <p class="plan-goal"><strong>Goal:</strong> Improve endurance, speed, strength, and performance</p>
+          <p class="plan-difficulty"><strong>Difficulty:</strong> Intermediate–Advanced</p>
+          <p class="plan-summary">
+            A more intense hybrid plan combining strength, conditioning, and explosive performance work.
+          </p>
+          <a href="{{ url_for('plan_overview', slug='athletic-performance') }}" class="btn btn-primary plan-btn">View Plan</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const cards = document.querySelectorAll(".stacked-plan-card");
+    const nextBtn = document.getElementById("nextPlanBtn");
+    const prevBtn = document.getElementById("prevPlanBtn");
+
+    let currentIndex = 0;
+
+    function updateCarousel() {
+      cards.forEach((card, index) => {
+        card.classList.remove("active", "next-1", "next-2", "hidden-card");
+
+        const offset = (index - currentIndex + cards.length) % cards.length;
+
+        if (offset === 0) {
+          card.classList.add("active");
+        } else if (offset === 1) {
+          card.classList.add("next-1");
+        } else if (offset === 2) {
+          card.classList.add("next-2");
+        } else {
+          card.classList.add("hidden-card");
+        }
+      });
+    }
+
+    nextBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % cards.length;
+      updateCarousel();
+    });
+
+    prevBtn.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + cards.length) % cards.length;
+      updateCarousel();
+    });
+
+    updateCarousel();
+  </script>
+
+</body>
+</html>
